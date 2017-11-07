@@ -1,22 +1,46 @@
+//===========================================================================80
+// This code is to read the RC Test data
+// and manipulate it into a readable format
+// of known machine learning algorithm.
+// I chose the comma separated values (csv) format
+// by having pandas in mind.
+//
+// author: Seungbum Koo
+// Date: Tue 11/07/2017 initial release
+//===========================================================================80
+
 #include<iostream>
 #include<fstream>
 #include<sstream>
 #include<string>
 #include<vector>
+#include<cstdlib>
 
 typedef std::vector< std::vector<std::string> > Rows;
-int main()
+
+int main(int argc, char *argv[] )
 {
 
-   std::ifstream file_to_read("RC Test.txt",std::ifstream::in);
+   std::ifstream file_to_read(argv[1],std::ifstream::in);
    Rows rows;
    unsigned int i, j;
+
+   if( argc<2 )
+   {
+      std::cerr << "Usage: a.out [filename]" << std::endl;
+      exit(1);
+   }
 
    // Check if the file exists.
    if( !file_to_read )
    {
-      std::cout << "RC Test.txt does not exist." << std::endl;
+      std::cout << argv[1] << " does not exist." << std::endl;
       std::cerr << "File open failed." << std::endl;
+      exit(2);
+   }
+   else
+   {
+      std::cout << "Reading " << argv[1] << std::endl;
    }
 
    // Read RC Test.txt file.
@@ -75,20 +99,20 @@ int main()
                if( rows[i][j].find_first_of(',')<rows[i][j].size() )
                   rows[i][j].replace(rows[i][j].find_first_of(','),1,"-");
                // Write.
-               std::cout<<rows[i][j];
+               // std::cout<<rows[i][j];
                file_to_write << rows[i][j++];
                if( j!=rows[i].size() )
                {
                   file_to_write << ',';
-                  std::cout<<',';
+                  // std::cout<<',';
                }
             }
-            std::cout<<std::endl;
+            // std::cout<<std::endl;
             file_to_write << std::endl;
             // Write contents.
             i+=3;
             j=0;
-            std::cout<<rows[i].size()<<std::endl;
+            // std::cout<<rows[i].size()<<std::endl;
             // Write rows in file.
             // Tabbed space in file is not read by vector.
             // So if the size of rows[i][j]==0, that means that line is empty.
@@ -97,15 +121,15 @@ int main()
                // Write columns in file.
                while( j<rows[i].size() )
                {
-                  std::cout<<rows[i][j];
+                  // std::cout<<rows[i][j];
                   file_to_write << rows[i][j++];
                   if( j!=rows[i].size() )
                   {
                      file_to_write << ',';
-                     std::cout<<',';
+                     // std::cout<<',';
                   }
                }
-               std::cout<<std::endl;
+               // std::cout<<std::endl;
                file_to_write << std::endl;
                // Move to the next line.
                // If we reached the end of file, movig to the next line will cause SEGV.
