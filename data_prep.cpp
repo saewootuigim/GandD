@@ -23,7 +23,7 @@ int main(int argc, char *argv[] )
 
    std::ifstream file_to_read(argv[1],std::ifstream::in);
    Rows rows;
-   unsigned int i, j;
+   unsigned int i, j, k;
 
    if( argc<2 )
    {
@@ -54,13 +54,17 @@ int main(int argc, char *argv[] )
       }
    }
    file_to_read.close();
-
+// // FOR DEBUGGING: PRINT ALL INFORMATION
    // for( i=0; i<rows.size(); i++ )
    // {
    //    for( j=0; j<rows[i].size(); j++ )
    //       std::cout<<rows[i][j]<<'\t';
    //    std::cout<<std::endl;
    // }
+// // FOR DEBUGGING: PRINT HEADER
+   // for( i=0; i<rows[43].size(); i++ )
+   //    std::cout<< rows[43][i] << std::endl;
+   // exit(1);
 
    // Search the position in file where the confining stress is written.
    // std::cout << rows.size() << std::endl;
@@ -93,15 +97,49 @@ int main(int argc, char *argv[] )
             i+=2; // \n
             j=0; // \r
             // Write header.
-            while( j<rows[i].size() ){
-               // Search for comma in the string and replace it by a dash.
-               // We do this because we are saving the file with csv extension.
-               if( rows[i][j].find_first_of(',')<rows[i][j].size() )
-                  rows[i][j].replace(rows[i][j].find_first_of(','),1,"-");
+            for( j=0; j<rows[i].size(); j++ )
+            {
+               // Erase commas in the string.
+               while( true )
+               {
+                  k = rows[i][j].find_first_of(',');
+                  if( k>=rows[i][j].size() ) break;
+                  rows[i][j].erase(k,1);
+               }
+               // Erase whitespaces in the string.
+               while( true )
+               {
+                  k = rows[i][j].find_first_of(" ");
+                  if( k>=rows[i][j].size() ) break;
+                  // std::cout<< "k=" << k << std::endl;
+                  // std::cout << "str["<<k<<"]="<<rows[i][j][k]<<std::endl;
+                  rows[i][j].erase(k,1);
+                  // std::cout << rows[i][j] << std::endl;
+               }
+               // Replace symbol '%' by word 'percent'.
+               while( true )
+               {
+                  k = rows[i][j].find_first_of('%');
+                  if( k>=rows[i][j].size() ) break;
+                  rows[i][j].replace(k,1,"percent");
+               }
+               // Replace symbol '()' by '[]'.
+               while( true )
+               {
+                  k = rows[i][j].find_first_of('(');
+                  if( k>=rows[i][j].size() ) break;
+                  rows[i][j].replace(k,1,"[");
+               }
+               while( true )
+               {
+                  k = rows[i][j].find_first_of(')');
+                  if( k>=rows[i][j].size() ) break;
+                  rows[i][j].replace(k,1,"]");
+               }
                // Write.
                // std::cout<<rows[i][j];
-               file_to_write << rows[i][j++];
-               if( j!=rows[i].size() )
+               file_to_write << rows[i][j];
+               if( j!=rows[i].size()-1 )
                {
                   file_to_write << ',';
                   // std::cout<<',';
