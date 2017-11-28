@@ -1,0 +1,47 @@
+RESONANT COLUMN  TEST PROGRAM - DEVELOPED AT THE UNIVERSITY OF TEXAS AT AUSTIN 
+DATA AND RESULTS 
+PROGRAM RC TEST Version 1.0 - Dr. Stokoe and Keene 2014
+
+SAMPLE NAME:
+BTS18
+
+Start Time = 2/28/2014 3:09:02 PM
+
+SAMPLE INFORMATION:
+
+Outside Diameter = 6.994000E+0 cm
+2.854694E+0 in
+Inside Diameter = 0.000000E+0 cm
+0.000000E+0 in
+Height = 15.597000E+0 cm
+6.140551E+0 in
+Weight = 1.304000E+3 g
+2.874843E+0 lbs
+Water Content = 0.000000E+0 %
+Sample Volume = 21.160554E-3 ft^3
+Dry Unit Weight = 135.858586E+0 pcf
+Specific Gravity = 2.470000E+0
+Initial Void Ratio = 134.474000E-3
+Degree of Saturation = 0.000000E+0 %
+
+TEST CELL INFORMATION: 
+Drive Plate Number = DP #5
+Drive Moment of Inertia = 2.07470000E-3 ft-lbs/sec^2 
+Top Cap Moment of Inertia = 148.09200000E-6 ft-lbs/sec^2 
+Top Cap = I of 2.8 in. Aluminum Top Cap or # 6
+LVDT Calibration Factor = 4.46300000E-3 ft/volt
+Initial LVDT Output Voltage = 3.24544500E+0 volt
+approx. beta = 492.71758648E-3
+
+
+
+
+
+												
+												
+Loading	Confining Pressure Pc =   18.000000 psi											
+												
+Time (min)	Void Ratio	Shear Strain, HP (%)	Shear Modulus (psf)	Damping fv (%)	Damping hp (%)	Resonant Fr. (Hz)	Ac Out (mV)	LVDT OP (V)	Vs (fps)	Shear Strain, FVD (%)	FVD Signals Stacked	Charge Amp Out (mV)
+												
+------------------------------------------------------------------------------------------												
+20.096861	0.134474	0.000234	3527765.008702	0.762812	0.945551	140.130000	25.000000	3.246351	914.404571	0.000234	3.000000	121.583072
